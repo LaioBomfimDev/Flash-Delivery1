@@ -1,0 +1,132 @@
+.delivery-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    transition: all var(--transition-normal);
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.delivery-card:hover {
+    border-color: var(--border-glow);
+    box-shadow: var(--shadow-md);
+}
+
+.delivery-card--in_transit {
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+.delivery-card--waiting {
+    border-color: rgba(244, 208, 63, 0.2);
+}
+
+.delivery-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.delivery-card__time {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+.delivery-card__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.delivery-card__merchant {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.delivery-card__addresses {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.delivery-card__address {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.delivery-card__address .icon-pickup {
+    color: var(--accent-gold);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.delivery-card__address .icon-delivery {
+    color: var(--primary-red);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.delivery-card__address div {
+    display: flex;
+    flex-direction: column;
+}
+
+.delivery-card__address .label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.delivery-card__address .value {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.delivery-card__motoboy {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--border-color);
+}
+
+.delivery-card__motoboy .label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.delivery-card__motoboy .value {
+    font-weight: 600;
+    color: var(--status-transit);
+}
+
+.delivery-card__value {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    color: var(--status-completed);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.delivery-card__actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+}
+
+.delivery-card__actions button {
+    flex: 1;
+}

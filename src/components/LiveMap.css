@@ -1,0 +1,137 @@
+.live-map {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.live-map__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.live-map__title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.live-map__title svg {
+    color: var(--primary-red);
+}
+
+.live-map__count {
+    font-size: 0.875rem;
+    color: var(--accent-gold);
+    font-weight: 600;
+}
+
+.live-map__container {
+    position: relative;
+    flex: 1;
+    min-height: 300px;
+}
+
+.live-map__iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    filter: grayscale(20%) contrast(1.1);
+}
+
+.live-map__overlay {
+    position: absolute;
+    top: var(--spacing-md);
+    left: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    max-width: 280px;
+    max-height: calc(100% - var(--spacing-xl));
+    overflow-y: auto;
+}
+
+.live-map__marker-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem 0.875rem;
+    background: rgba(13, 13, 20, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    animation: slideIn 0.3s ease forwards;
+    opacity: 0;
+}
+
+.live-map__marker-info--waiting {
+    border-left: 3px solid var(--status-waiting);
+}
+
+.live-map__marker-info--in_transit {
+    border-left: 3px solid var(--status-transit);
+}
+
+.live-map__marker-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.live-map__marker-info--waiting .live-map__marker-icon {
+    background: rgba(244, 208, 63, 0.2);
+    color: var(--status-waiting);
+}
+
+.live-map__marker-info--in_transit .live-map__marker-icon {
+    background: rgba(59, 130, 246, 0.2);
+    color: var(--status-transit);
+}
+
+.live-map__marker-details {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.live-map__marker-merchant {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.live-map__marker-status {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.live-map__more {
+    padding: 0.5rem 0.875rem;
+    background: rgba(13, 13, 20, 0.9);
+    border-radius: var(--radius-md);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+@media (max-width: 640px) {
+    .live-map__overlay {
+        max-width: calc(100% - var(--spacing-xl));
+    }
+}

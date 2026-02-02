@@ -1,0 +1,120 @@
+.motoboy-home {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.motoboy-home__stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.stat-card__value {
+    font-size: 2.5rem;
+    font-weight: 900;
+}
+
+.stat-card__label {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.motoboy-home__section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.motoboy-home__section--active {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-lg);
+}
+
+.motoboy-home__section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-lg);
+}
+
+.motoboy-home__section-title svg {
+    color: var(--primary-red);
+}
+
+.motoboy-home__deliveries {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.motoboy-home__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-2xl);
+    background: var(--bg-card);
+    border: 1px dashed var(--border-color);
+    border-radius: var(--radius-lg);
+    text-align: center;
+}
+
+.motoboy-home__empty svg {
+    color: var(--text-muted);
+}
+
+.motoboy-home__empty p {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.motoboy-home__empty span {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+/* Additional button styles */
+.btn--gold {
+    background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-orange) 100%);
+    color: var(--bg-primary);
+    font-weight: 700;
+}
+
+.btn--gold:hover {
+    box-shadow: var(--shadow-gold-glow);
+}
+
+.btn--success {
+    background: linear-gradient(135deg, var(--status-completed) 0%, #16a34a 100%);
+    color: white;
+    font-weight: 700;
+}
+
+.btn--success:hover {
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+}
+
+.btn--full {
+    width: 100%;
+}
+
+@media (max-width: 640px) {
+    .stat-card__value {
+        font-size: 1.75rem;
+    }
+}

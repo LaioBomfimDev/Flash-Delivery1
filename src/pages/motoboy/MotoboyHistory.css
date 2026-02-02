@@ -1,0 +1,172 @@
+.motoboy-history {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.motoboy-history__overview {
+    margin-bottom: var(--spacing-xl);
+}
+
+.earnings-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.earnings-card--main {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.05) 100%);
+    border-color: rgba(34, 197, 94, 0.3);
+    margin-bottom: var(--spacing-md);
+}
+
+.earnings-card__icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(34, 197, 94, 0.2);
+    color: var(--status-completed);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.earnings-card__icon--today {
+    width: 48px;
+    height: 48px;
+    background: rgba(244, 208, 63, 0.15);
+    color: var(--accent-gold);
+}
+
+.earnings-card__icon--deliveries {
+    width: 48px;
+    height: 48px;
+    background: rgba(230, 57, 70, 0.15);
+    color: var(--primary-red);
+}
+
+.earnings-card__content {
+    display: flex;
+    flex-direction: column;
+}
+
+.earnings-card__label {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.earnings-card__value {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--status-completed);
+}
+
+.earnings-card--main .earnings-card__value {
+    font-size: 2.5rem;
+}
+
+.earnings-card__value--small {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+.earnings-cards-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+}
+
+.motoboy-history__section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.motoboy-history__section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-lg);
+}
+
+.motoboy-history__section-title svg {
+    color: var(--primary-red);
+}
+
+.motoboy-history__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-2xl);
+    background: var(--bg-card);
+    border: 1px dashed var(--border-color);
+    border-radius: var(--radius-lg);
+    color: var(--text-muted);
+}
+
+.motoboy-history__table-wrapper {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.motoboy-history__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.motoboy-history__table th {
+    text-align: left;
+    padding: var(--spacing-md);
+    background: var(--bg-tertiary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.motoboy-history__table td {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.9rem;
+}
+
+.motoboy-history__table tr:last-child td {
+    border-bottom: none;
+}
+
+.motoboy-history__table tr:hover td {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.motoboy-history__date {
+    display: flex;
+    flex-direction: column;
+}
+
+.motoboy-history__date span:first-child {
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .motoboy-history__table-wrapper {
+        overflow-x: auto;
+    }
+
+    .motoboy-history__table {
+        min-width: 600px;
+    }
+
+    .earnings-cards-row {
+        grid-template-columns: 1fr;
+    }
+}

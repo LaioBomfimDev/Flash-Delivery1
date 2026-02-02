@@ -1,0 +1,99 @@
+.lightning-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: var(--radius-xl);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all var(--transition-normal);
+}
+
+.lightning-btn--primary {
+    background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+    color: var(--text-primary);
+}
+
+.lightning-btn--gold {
+    background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-orange) 100%);
+    color: var(--bg-primary);
+}
+
+.lightning-btn--large {
+    padding: 1.5rem 3rem;
+    font-size: 1.5rem;
+    min-width: 280px;
+}
+
+.lightning-btn--medium {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    min-width: 180px;
+}
+
+.lightning-btn--small {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    min-width: 120px;
+}
+
+.lightning-btn__glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.lightning-btn:hover .lightning-btn__glow {
+    opacity: 1;
+}
+
+.lightning-btn__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.lightning-btn__icon {
+    width: 1.5em;
+    height: 1.5em;
+    animation: lightning 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px var(--accent-gold));
+    color: var(--accent-gold);
+}
+
+.lightning-btn--gold .lightning-btn__icon {
+    color: var(--bg-primary);
+    filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.3));
+}
+
+.lightning-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+.lightning-btn--gold:hover {
+    box-shadow: var(--shadow-gold-glow);
+}
+
+.lightning-btn:active {
+    transform: translateY(0);
+}
+
+.lightning-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.lightning-btn:not(:disabled):hover {
+    animation: glow 2s ease-in-out infinite;
+}
