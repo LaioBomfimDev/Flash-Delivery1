@@ -1,12 +1,13 @@
-import { Zap, LogOut, User, Menu, X } from 'lucide-react';
+import { Zap, LogOut, User, Menu, X, Users, Bike } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useDelivery } from '../context/DeliveryContext';
 import './Header.css';
 
 const roleLabels = {
-    merchant: 'Comerciante',
-    motoboy: 'Motoboy',
+    merchant: 'Parceiro Empresário',
+    motoboy: 'Parceiro Entregador',
     admin: 'Administrador',
 };
 
@@ -28,6 +29,7 @@ const navItems = {
 
 export default function Header() {
     const { user, logout } = useAuth();
+    const { merchants, motoboys } = useDelivery();
     const navigate = useNavigate();
     const location = useLocation();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -39,6 +41,10 @@ export default function Header() {
 
     const items = navItems[user?.role] || [];
 
+    // Calculate online counts
+    const onlineMotoboys = motoboys?.filter(m => m.active)?.length || 0;
+    const onlineMerchants = merchants?.filter(m => m.subscriptionPaid)?.length || 0;
+
     return (
         <header className="header">
             <div className="header__container">
@@ -47,6 +53,18 @@ export default function Header() {
                         <Zap className="header__logo-icon" />
                     </div>
                     <span className="header__title">Flash Catu</span>
+                </div>
+
+                {/* Online Status - Visible to all */}
+                <div className="header__online-status">
+                    <div className="header__online-item header__online-item--motoboy">
+                        <Bike size={16} />
+                        <span>{onlineMotoboys} Entregadores</span>
+                    </div>
+                    <div className="header__online-item header__online-item--merchant">
+                        <Users size={16} />
+                        <span>{onlineMerchants} Empresários</span>
+                    </div>
                 </div>
 
                 <nav className={`header__nav ${mobileMenuOpen ? 'header__nav--open' : ''}`}>

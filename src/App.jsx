@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { DeliveryProvider } from './context/DeliveryContext';
+import { NotificationProvider } from './context/NotificationContext';
+import Toast from './components/Toast';
 
 // Pages
 import Login from './pages/Login';
@@ -10,6 +12,7 @@ import MotoboyHistory from './pages/motoboy/MotoboyHistory';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import UserManagement from './pages/admin/UserManagement';
 import DeliveryManagement from './pages/admin/DeliveryManagement';
+import TrackingPage from './pages/TrackingPage';
 
 import './index.css';
 
@@ -76,6 +79,9 @@ function AppRoutes() {
         </PublicRoute>
       } />
 
+      {/* Public Tracking Page (no login required) */}
+      <Route path="/rastreio/:trackingCode" element={<TrackingPage />} />
+
       {/* Merchant Routes */}
       <Route path="/merchant" element={
         <ProtectedRoute allowedRoles={['merchant']}>
@@ -129,7 +135,10 @@ export default function App() {
     <BrowserRouter>
       <AuthProvider>
         <DeliveryProvider>
-          <AppRoutes />
+          <NotificationProvider>
+            <AppRoutes />
+            <Toast />
+          </NotificationProvider>
         </DeliveryProvider>
       </AuthProvider>
     </BrowserRouter>

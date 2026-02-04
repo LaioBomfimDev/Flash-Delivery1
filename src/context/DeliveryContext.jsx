@@ -3,20 +3,33 @@ import { mockDeliveries, mockMerchants, mockMotoboys } from '../data/mockData';
 
 const DeliveryContext = createContext(null);
 
+// Generate unique tracking code
+const generateTrackingCode = () => {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let code = '';
+    for (let i = 0; i < 6; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return code;
+};
+
 export function DeliveryProvider({ children }) {
     const [deliveries, setDeliveries] = useState([]);
     const [merchants, setMerchants] = useState([]);
     const [motoboys, setMotoboys] = useState([]);
+    const [favoriteMotoboys, setFavoriteMotoboys] = useState({}); // { merchantId: motoboyId }
 
     useEffect(() => {
         // Load from localStorage or use mock data
         const savedDeliveries = localStorage.getItem('flashcatu_deliveries');
         const savedMerchants = localStorage.getItem('flashcatu_merchants');
         const savedMotoboys = localStorage.getItem('flashcatu_motoboys');
+        const savedFavorites = localStorage.getItem('flashcatu_favorites');
 
         setDeliveries(savedDeliveries ? JSON.parse(savedDeliveries) : mockDeliveries);
         setMerchants(savedMerchants ? JSON.parse(savedMerchants) : mockMerchants);
         setMotoboys(savedMotoboys ? JSON.parse(savedMotoboys) : mockMotoboys);
+        setFavoriteMotoboys(savedFavorites ? JSON.parse(savedFavorites) : {});
     }, []);
 
     // Persist to localStorage
@@ -38,10 +51,40 @@ export function DeliveryProvider({ children }) {
         }
     }, [motoboys]);
 
-    // Create a new delivery
+    useEffect(() => {
+        localStorage.setItem('flashcatu_favorites', JSON.stringify(favoriteMotoboys));
+    }, [favoriteMotoboys]);
+
+    // Add favorite motoboy for a merchant
+    const addFavorite = (merchantId, motoboyId, motoboyName) => {
+        setFavoriteMotoboys(prev => ({
+            ...prev,
+            [merchantId]: { id: motoboyId, name: motoboyName }
+        }));
+    };
+
+    // Remove favorite motoboy for a merchant
+    const removeFavorite = (merchantId) => {
+        setFavoriteMotoboys(prev => {
+            const newFavorites = { ...prev };
+            delete newFavorites[merchantId];
+            return newFavorites;
+        });
+    };
+
+    // Get favorite motoboy for a merchant
+    const getFavorite = (merchantId) => {
+        return favoriteMotoboys[merchantId] || null;
+    };
+
+    // Create a new delivery with tracking code and priority
     const createDelivery = (merchantId, merchantName, pickupAddress, deliveryAddress) => {
+        const favorite = getFavorite(merchantId);
+        const now = new Date();
+
         const newDelivery = {
             id: `d${Date.now()}`,
+            trackingCode: generateTrackingCode(),
             merchantId,
             merchantName,
             pickupAddress,
@@ -51,13 +94,23 @@ export function DeliveryProvider({ children }) {
             status: 'waiting',
             motoboyId: null,
             motoboyName: null,
+            // Priority for favorite motoboy (30 seconds)
+            priorityMotoboyId: favorite?.id || null,
+            priorityMotoboyName: favorite?.name || null,
+            priorityExpiresAt: favorite ? new Date(now.getTime() + 30000).toISOString() : null,
             value: 7.00,
-            createdAt: new Date().toISOString(),
+            createdAt: now.toISOString(),
             acceptedAt: null,
             completedAt: null,
         };
         setDeliveries(prev => [newDelivery, ...prev]);
         return newDelivery;
+    };
+
+    // Check if priority is still valid
+    const isPriorityValid = (delivery) => {
+        if (!delivery.priorityExpiresAt) return false;
+        return new Date() < new Date(delivery.priorityExpiresAt);
     };
 
     // Accept a delivery (motoboy)
@@ -178,9 +231,20 @@ export function DeliveryProvider({ children }) {
         return deliveries.filter(d => d.motoboyId === motoboyId);
     };
 
-    // Get available deliveries (waiting status)
-    const getAvailableDeliveries = () => {
-        return deliveries.filter(d => d.status === 'waiting');
+    // Get available deliveries for a motoboy (considering priority)
+    const getAvailableDeliveries = (motoboyId = null) => {
+        return deliveries.filter(d => {
+            if (d.status !== 'waiting') return false;
+
+            // If delivery has priority and it's still valid
+            if (d.priorityMotoboyId && isPriorityValid(d)) {
+                // Only show to priority motoboy
+                return d.priorityMotoboyId === motoboyId;
+            }
+
+            // Otherwise, show to all
+            return true;
+        });
     };
 
     // Get active deliveries (in_transit)
@@ -188,9 +252,14 @@ export function DeliveryProvider({ children }) {
         return deliveries.filter(d => d.status === 'in_transit');
     };
 
+    // Get delivery by tracking code
+    const getDeliveryByTrackingCode = (code) => {
+        return deliveries.find(d => d.trackingCode === code) || null;
+    };
+
     // Export deliveries to CSV
     const exportToCSV = () => {
-        const headers = ['Data', 'Comércio', 'Motoboy', 'Origem', 'Destino', 'Status', 'Valor'];
+        const headers = ['Data', 'Comércio', 'Motoboy', 'Origem', 'Destino', 'Status', 'Valor', 'Rastreio'];
         const rows = deliveries.map(d => [
             new Date(d.createdAt).toLocaleDateString('pt-BR'),
             d.merchantName,
@@ -201,6 +270,7 @@ export function DeliveryProvider({ children }) {
                 d.status === 'in_transit' ? 'Em trânsito' :
                     d.status === 'completed' ? 'Finalizado' : 'Cancelado',
             `R$ ${d.value.toFixed(2)}`,
+            d.trackingCode || '-',
         ]);
 
         const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
@@ -216,6 +286,7 @@ export function DeliveryProvider({ children }) {
             deliveries,
             merchants,
             motoboys,
+            favoriteMotoboys,
             createDelivery,
             acceptDelivery,
             completeDelivery,
@@ -228,6 +299,11 @@ export function DeliveryProvider({ children }) {
             getMotoboyDeliveries,
             getAvailableDeliveries,
             getActiveDeliveries,
+            getDeliveryByTrackingCode,
+            addFavorite,
+            removeFavorite,
+            getFavorite,
+            isPriorityValid,
             exportToCSV,
         }}>
             {children}

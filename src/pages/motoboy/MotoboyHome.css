@@ -3,53 +3,188 @@
     margin: 0 auto;
 }
 
+/* Stats Grid - Premium Style */
 .motoboy-home__stats {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-md);
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Earnings Card */
+.motoboy-home__earnings {
     margin-bottom: var(--spacing-xl);
 }
 
+.earnings-card {
+    background: linear-gradient(135deg, var(--status-completed) 0%, #15803d 100%);
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-xl);
+    text-align: center;
+    color: white;
+    box-shadow: 0 8px 30px rgba(22, 163, 74, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.earnings-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+    animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.earnings-card__label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.earnings-card__value {
+    display: block;
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: var(--spacing-xs);
+}
+
+.earnings-card__count {
+    display: block;
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
 .stat-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
+    background: white;
+    border: none;
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-xl);
     text-align: center;
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* Decorative gradient circle */
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    opacity: 0.1;
+    transition: all var(--transition-normal);
+}
+
+.stat-card:first-child::before {
+    background: radial-gradient(circle, var(--accent-gold), transparent);
+}
+
+.stat-card:last-child::before {
+    background: radial-gradient(circle, var(--primary-red), transparent);
+}
+
+/* Accent bar at bottom */
+.stat-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+}
+
+.stat-card:first-child::after {
+    background: linear-gradient(90deg, var(--accent-gold), var(--lightning-yellow));
+}
+
+.stat-card:last-child::after {
+    background: linear-gradient(90deg, var(--primary-red), var(--accent-orange));
+}
+
+.stat-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card:hover::before {
+    opacity: 0.2;
+    transform: translateX(-50%) scale(1.3);
 }
 
 .stat-card__value {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     font-weight: 900;
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.stat-card__value--money {
+    color: var(--status-completed);
+}
+
+.stat-card__value--count {
+    color: var(--status-transit);
 }
 
 .stat-card__label {
-    font-size: 0.875rem;
-    color: var(--text-muted);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
 }
 
+/* Sections */
 .motoboy-home__section {
     margin-bottom: var(--spacing-xl);
 }
 
 .motoboy-home__section--active {
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
-    border: 1px solid rgba(59, 130, 246, 0.2);
-    border-radius: var(--radius-xl);
-    padding: var(--spacing-lg);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(37, 99, 235, 0.02) 100%);
+    border: 2px solid var(--status-transit);
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-xl);
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.15);
 }
 
 .motoboy-home__section-title {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
     font-size: 1.25rem;
+    font-weight: 800;
     margin-bottom: var(--spacing-lg);
+    color: var(--text-primary);
 }
 
 .motoboy-home__section-title svg {
@@ -59,54 +194,65 @@
 .motoboy-home__deliveries {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md);
+    gap: var(--spacing-lg);
 }
 
+/* Empty State */
 .motoboy-home__empty {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-md);
     padding: var(--spacing-2xl);
-    background: var(--bg-card);
-    border: 1px dashed var(--border-color);
-    border-radius: var(--radius-lg);
+    background: white;
+    border: 2px dashed var(--border-strong);
+    border-radius: var(--radius-2xl);
     text-align: center;
 }
 
 .motoboy-home__empty svg {
-    color: var(--text-muted);
+    color: var(--accent-gold);
+    opacity: 0.5;
+    animation: pulse 2s ease-in-out infinite;
 }
 
 .motoboy-home__empty p {
     color: var(--text-primary);
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 1.2rem;
 }
 
 .motoboy-home__empty span {
     color: var(--text-muted);
-    font-size: 0.875rem;
+    font-size: 0.95rem;
+    font-weight: 500;
 }
 
-/* Additional button styles */
+/* Button Variants */
 .btn--gold {
     background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-orange) 100%);
-    color: var(--bg-primary);
+    color: white;
     font-weight: 700;
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);
+    border-radius: var(--radius-xl);
 }
 
 .btn--gold:hover {
-    box-shadow: var(--shadow-gold-glow);
+    box-shadow: 0 8px 30px rgba(245, 158, 11, 0.5);
+    transform: translateY(-3px);
 }
 
 .btn--success {
-    background: linear-gradient(135deg, var(--status-completed) 0%, #16a34a 100%);
+    background: linear-gradient(135deg, var(--status-completed) 0%, #15803d 100%);
     color: white;
     font-weight: 700;
+    box-shadow: 0 4px 16px rgba(22, 163, 74, 0.3);
+    border-radius: var(--radius-xl);
 }
 
 .btn--success:hover {
-    box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+    box-shadow: 0 8px 30px rgba(22, 163, 74, 0.5);
+    transform: translateY(-3px);
 }
 
 .btn--full {
@@ -115,6 +261,14 @@
 
 @media (max-width: 640px) {
     .stat-card__value {
-        font-size: 1.75rem;
+        font-size: 2.5rem;
+    }
+
+    .motoboy-home__stats {
+        gap: var(--spacing-md);
+    }
+
+    .stat-card {
+        padding: var(--spacing-lg);
     }
 }

@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Zap, Send, X } from 'lucide-react';
+import { Zap, Send, X, Clock } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useDelivery } from '../../context/DeliveryContext';
+import { useNotification } from '../../context/NotificationContext';
 import Header from '../../components/Header';
 import LightningButton from '../../components/LightningButton';
 import DeliveryCard from '../../components/DeliveryCard';
@@ -13,6 +14,7 @@ import './MerchantHome.css';
 export default function MerchantHome() {
     const { user } = useAuth();
     const { getMerchantDeliveries, createDelivery, merchants, deliveries } = useDelivery();
+    const { notify } = useNotification();
     const [showModal, setShowModal] = useState(false);
     const [address, setAddress] = useState('');
     const [loading, setLoading] = useState(false);
@@ -30,7 +32,6 @@ export default function MerchantHome() {
         // Extract address from Google Maps link if present
         let cleanAddress = address;
         if (address.includes('google.com/maps') || address.includes('goo.gl')) {
-            // Keep as is - the address will be used for display
             cleanAddress = `Link Maps: ${address}`;
         }
 
@@ -46,6 +47,9 @@ export default function MerchantHome() {
         setAddress('');
         setLoading(false);
         setShowModal(false);
+
+        // Show notification that delivery was requested
+        notify.deliveryRequested();
     };
 
     return (
@@ -105,6 +109,8 @@ export default function MerchantHome() {
                                     key={delivery.id}
                                     delivery={delivery}
                                     showMerchant={false}
+                                    showTrackingLink={true}
+                                    showFavoriteButton={delivery.status === 'completed'}
                                 />
                             ))}
                         </div>
@@ -148,6 +154,11 @@ export default function MerchantHome() {
                         </div>
 
                         <div className="modal__body">
+                            <div className="modal__wait-notice">
+                                <Clock size={20} />
+                                <span>Em até <strong>10 minutos</strong> um entregador chegará ao seu estabelecimento</span>
+                            </div>
+
                             <div className="form-group">
                                 <label>Endereço de Entrega</label>
                                 <textarea
@@ -179,7 +190,7 @@ export default function MerchantHome() {
                 </div>
             )}
 
-            <WhatsAppButton message="Olá! Sou comerciante do Flash Catu e preciso de ajuda." />
+            <WhatsAppButton message="Olá! Sou comerciante parceiro do Flash Catu e preciso de ajuda." />
         </>
     );
 }

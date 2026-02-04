@@ -8,7 +8,9 @@
     align-items: center;
     gap: 0.75rem;
     font-size: 1.75rem;
+    font-weight: 800;
     margin-bottom: var(--spacing-xl);
+    color: var(--text-primary);
 }
 
 .delivery-management__title svg {
@@ -47,29 +49,31 @@
 
 .status-filter {
     padding: 0.5rem 1rem;
-    background: var(--bg-tertiary);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     color: var(--text-secondary);
     font-size: 0.875rem;
-    font-weight: 500;
+    font-weight: 600;
     transition: all var(--transition-fast);
 }
 
 .status-filter:hover {
-    background: var(--bg-card);
+    background: white;
+    border-color: var(--border-strong);
 }
 
 .status-filter--active {
     color: white;
+    border-color: transparent;
 }
 
 .status-filter--all.status-filter--active {
-    background: var(--text-muted);
+    background: var(--text-secondary);
 }
 
 .status-filter--waiting.status-filter--active {
     background: var(--status-waiting);
-    color: var(--bg-primary);
 }
 
 .status-filter--in_transit.status-filter--active {
@@ -85,10 +89,11 @@
 }
 
 .delivery-management__table-wrapper {
-    background: var(--bg-card);
+    background: white;
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     overflow: hidden;
+    box-shadow: var(--shadow-sm);
 }
 
 .delivery-management__table {
@@ -99,12 +104,12 @@
 .delivery-management__table th {
     text-align: left;
     padding: var(--spacing-md);
-    background: var(--bg-tertiary);
+    background: var(--bg-secondary);
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -112,6 +117,7 @@
     padding: var(--spacing-md);
     border-bottom: 1px solid var(--border-color);
     font-size: 0.9rem;
+    color: var(--text-primary);
 }
 
 .delivery-management__table tr:last-child td {
@@ -119,15 +125,15 @@
 }
 
 .delivery-row:hover td {
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--bg-secondary);
 }
 
 .delivery-row--in_transit {
-    background: rgba(59, 130, 246, 0.03);
+    background: rgba(37, 99, 235, 0.05);
 }
 
 .delivery-row--waiting {
-    background: rgba(244, 208, 63, 0.03);
+    background: rgba(217, 119, 6, 0.05);
 }
 
 .delivery-management__date {
@@ -136,7 +142,7 @@
 }
 
 .delivery-management__date span:first-child {
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .delivery-management__address {
@@ -151,17 +157,18 @@
 }
 
 .action-btn {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: var(--radius-sm);
+    border: 1px solid transparent;
     transition: all var(--transition-fast);
 }
 
 .action-btn--maps {
-    background: rgba(59, 130, 246, 0.1);
+    background: var(--status-transit-bg);
     color: var(--status-transit);
 }
 
@@ -171,17 +178,17 @@
 }
 
 .action-btn--reassign {
-    background: rgba(244, 208, 63, 0.1);
+    background: var(--accent-gold-light);
     color: var(--accent-gold);
 }
 
 .action-btn--reassign:hover {
     background: var(--accent-gold);
-    color: var(--bg-primary);
+    color: white;
 }
 
 .action-btn--cancel {
-    background: rgba(239, 68, 68, 0.1);
+    background: var(--primary-red-light);
     color: var(--status-cancelled);
 }
 
@@ -200,6 +207,11 @@
     text-align: center;
 }
 
+.delivery-management__empty svg {
+    color: var(--accent-gold);
+    opacity: 0.5;
+}
+
 /* Motoboy List in Modal */
 .motoboy-list {
     display: flex;
@@ -215,29 +227,33 @@
     justify-content: space-between;
     align-items: center;
     padding: var(--spacing-md);
-    background: var(--bg-tertiary);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     transition: all var(--transition-fast);
+    cursor: pointer;
 }
 
 .motoboy-option:hover {
-    background: var(--bg-card);
+    background: white;
     border-color: var(--primary-red);
+    box-shadow: var(--shadow-sm);
 }
 
 .motoboy-option--current {
-    background: rgba(59, 130, 246, 0.1);
-    border: 1px solid var(--status-transit);
+    background: var(--status-transit-bg);
+    border-color: var(--status-transit);
 }
 
 .motoboy-option__name {
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-primary);
 }
 
 .motoboy-option__plate {
     font-size: 0.875rem;
     color: var(--text-muted);
+    font-weight: 500;
 }
 
 @media (max-width: 1024px) {

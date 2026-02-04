@@ -7,14 +7,14 @@ import './Login.css';
 const roles = [
     {
         id: 'merchant',
-        label: 'Comerciante',
+        label: 'Parceiro Flash Empresário',
         icon: Store,
         description: 'Solicite entregas e acompanhe em tempo real',
         color: 'gold'
     },
     {
         id: 'motoboy',
-        label: 'Motoboy',
+        label: 'Parceiro Flash Entregador',
         icon: Bike,
         description: 'Aceite corridas e ganhe R$ 7,00 por entrega',
         color: 'blue'

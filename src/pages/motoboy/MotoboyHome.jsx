@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Navigation, CheckCircle2, Zap } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useDelivery } from '../../context/DeliveryContext';
+import { useNotification } from '../../context/NotificationContext';
 import Header from '../../components/Header';
 import DeliveryCard from '../../components/DeliveryCard';
 import LiveMap from '../../components/LiveMap';
@@ -11,21 +12,35 @@ import './MotoboyHome.css';
 export default function MotoboyHome() {
     const { user } = useAuth();
     const { getAvailableDeliveries, getMotoboyDeliveries, acceptDelivery, completeDelivery, deliveries } = useDelivery();
+    const { notify } = useNotification();
     const [accepting, setAccepting] = useState(null);
 
-    const availableDeliveries = getAvailableDeliveries();
+    const availableDeliveries = getAvailableDeliveries(user?.id);
     const myActiveDeliveries = getMotoboyDeliveries(user?.id).filter(d => d.status === 'in_transit');
+
+    // Calculate today's earnings
+    const todayDeliveries = getMotoboyDeliveries(user?.id).filter(d => {
+        const today = new Date().toDateString();
+        return d.completedAt && new Date(d.completedAt).toDateString() === today;
+    });
+    const todayEarnings = todayDeliveries.length * 7; // R$7 per delivery
 
     const handleAccept = async (deliveryId) => {
         setAccepting(deliveryId);
         await new Promise(resolve => setTimeout(resolve, 500));
         acceptDelivery(deliveryId, user.id, user.name);
         setAccepting(null);
+
+        // Notify that delivery was accepted
+        notify.success('⚡ Corrida Aceita!', 'Dirija-se ao estabelecimento para coleta');
     };
 
     const handleComplete = async (deliveryId) => {
         await new Promise(resolve => setTimeout(resolve, 300));
         completeDelivery(deliveryId);
+
+        // Notify completion
+        notify.deliveryCompleted();
     };
 
     const openInMaps = (coords) => {
@@ -45,6 +60,15 @@ export default function MotoboyHome() {
                     <div className="stat-card">
                         <span className="stat-card__value text-red">{myActiveDeliveries.length}</span>
                         <span className="stat-card__label">Em andamento</span>
+                    </div>
+                </div>
+
+                {/* Today's Earnings */}
+                <div className="motoboy-home__earnings">
+                    <div className="earnings-card">
+                        <span className="earnings-card__label">Ganhos Hoje</span>
+                        <span className="earnings-card__value">R$ {todayEarnings.toFixed(2)}</span>
+                        <span className="earnings-card__count">{todayDeliveries.length} entregas</span>
                     </div>
                 </div>
 
@@ -126,7 +150,7 @@ export default function MotoboyHome() {
                     )}
                 </section>
             </main>
-            <WhatsAppButton message="Olá! Sou motoboy do Flash Catu e preciso de ajuda." />
+            <WhatsAppButton message="Olá! Sou entregador parceiro do Flash Catu e preciso de ajuda." />
         </>
     );
 }
