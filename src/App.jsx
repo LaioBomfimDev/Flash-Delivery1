@@ -42,7 +42,11 @@ function ProtectedRoute({ children, allowedRoles }) {
     return <Navigate to={redirects[user?.role] || '/login'} replace />;
   }
 
-  return children;
+  return (
+    <div className="page-enter">
+      {children}
+    </div>
+  );
 }
 
 // Redirect authenticated users to their home
@@ -66,7 +70,11 @@ function PublicRoute({ children }) {
     return <Navigate to={redirects[user?.role] || '/'} replace />;
   }
 
-  return children;
+  return (
+    <div className="page-enter">
+      {children}
+    </div>
+  );
 }
 
 function AppRoutes() {

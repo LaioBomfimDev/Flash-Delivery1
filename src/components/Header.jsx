@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useDelivery } from '../context/DeliveryContext';
+import haptics from '../utils/haptics';
 import './Header.css';
 
 const roleLabels = {
@@ -35,6 +36,7 @@ export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const handleLogout = () => {
+        haptics.medium();
         logout();
         navigate('/login');
     };
@@ -55,53 +57,55 @@ export default function Header() {
                     <span className="header__title">Flash Catu</span>
                 </div>
 
-                {/* Online Status - Visible to all */}
-                <div className="header__online-status">
-                    <div className="header__online-item header__online-item--motoboy">
-                        <Bike size={16} />
-                        <span>{onlineMotoboys} Entregadores</span>
-                    </div>
-                    <div className="header__online-item header__online-item--merchant">
-                        <Users size={16} />
-                        <span>{onlineMerchants} Empresários</span>
-                    </div>
-                </div>
-
-                <nav className={`header__nav ${mobileMenuOpen ? 'header__nav--open' : ''}`}>
-                    {items.map((item) => (
-                        <button
-                            key={item.path}
-                            className={`header__nav-item ${location.pathname === item.path ? 'header__nav-item--active' : ''}`}
-                            onClick={() => {
-                                navigate(item.path);
-                                setMobileMenuOpen(false);
-                            }}
-                        >
-                            {item.label}
-                        </button>
-                    ))}
-                </nav>
-
-                <div className="header__user">
-                    <div className="header__user-info">
-                        <User size={18} />
-                        <div className="header__user-details">
-                            <span className="header__user-name">{user?.name}</span>
-                            <span className="header__user-role">{roleLabels[user?.role]}</span>
+                <div className="header__actions-wrapper">
+                    {/* Online Status - Visible to all */}
+                    <div className="header__online-status">
+                        <div className="header__online-item header__online-item--motoboy">
+                            <Bike size={16} />
+                            <span>{onlineMotoboys} Entregadores</span>
+                        </div>
+                        <div className="header__online-item header__online-item--merchant">
+                            <Users size={16} />
+                            <span>{onlineMerchants} Empresários</span>
                         </div>
                     </div>
 
-                    <button className="header__logout" onClick={handleLogout} title="Sair">
-                        <LogOut size={20} />
+                    <nav className={`header__nav ${mobileMenuOpen ? 'header__nav--open' : ''}`}>
+                        {items.map((item) => (
+                            <button
+                                key={item.path}
+                                className={`header__nav-item ${location.pathname === item.path ? 'header__nav-item--active' : ''}`}
+                                onClick={() => {
+                                    navigate(item.path);
+                                    setMobileMenuOpen(false);
+                                }}
+                            >
+                                {item.label}
+                            </button>
+                        ))}
+                    </nav>
+
+                    <div className="header__user">
+                        <div className="header__user-info">
+                            <User size={18} />
+                            <div className="header__user-details">
+                                <span className="header__user-name">{user?.name}</span>
+                                <span className="header__user-role">{roleLabels[user?.role]}</span>
+                            </div>
+                        </div>
+
+                        <button className="header__logout" onClick={handleLogout} title="Sair">
+                            <LogOut size={20} />
+                        </button>
+                    </div>
+
+                    <button
+                        className="header__mobile-toggle"
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    >
+                        {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
                 </div>
-
-                <button
-                    className="header__mobile-toggle"
-                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                >
-                    {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
             </div>
         </header>
     );

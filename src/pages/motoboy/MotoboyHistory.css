@@ -1,20 +1,49 @@
+/* MotoboyHistory - Mobile First */
 .motoboy-history {
+    width: 100%;
     max-width: 1000px;
     margin: 0 auto;
 }
 
 .motoboy-history__overview {
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+    .motoboy-history__overview {
+        margin-bottom: var(--spacing-xl);
+    }
+}
+
+/* Earnings Cards - Stacked on Mobile */
+.earnings-cards-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+}
+
+@media (min-width: 480px) {
+    .earnings-cards-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .earnings-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-md);
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
+    min-height: 80px;
+}
+
+@media (min-width: 768px) {
+    .earnings-card {
+        border-radius: var(--radius-lg);
+        padding: var(--spacing-lg);
+    }
 }
 
 .earnings-card--main {
@@ -24,62 +53,105 @@
 }
 
 .earnings-card__icon {
-    width: 60px;
-    height: 60px;
+    width: 48px;
+    height: 48px;
     background: rgba(34, 197, 94, 0.2);
     color: var(--status-completed);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
 }
 
+@media (min-width: 768px) {
+    .earnings-card__icon {
+        width: 60px;
+        height: 60px;
+        border-radius: var(--radius-lg);
+    }
+}
+
 .earnings-card__icon--today {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     background: rgba(244, 208, 63, 0.15);
     color: var(--accent-gold);
 }
 
+@media (min-width: 768px) {
+    .earnings-card__icon--today {
+        width: 48px;
+        height: 48px;
+    }
+}
+
 .earnings-card__icon--deliveries {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     background: rgba(230, 57, 70, 0.15);
     color: var(--primary-red);
+}
+
+@media (min-width: 768px) {
+    .earnings-card__icon--deliveries {
+        width: 48px;
+        height: 48px;
+    }
 }
 
 .earnings-card__content {
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 
 .earnings-card__label {
-    font-size: 0.875rem;
+    font-size: var(--font-size-xs);
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+@media (min-width: 768px) {
+    .earnings-card__label {
+        font-size: 0.875rem;
+    }
 }
 
 .earnings-card__value {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 900;
     color: var(--status-completed);
+    line-height: 1.1;
+}
+
+@media (min-width: 768px) {
+    .earnings-card__value {
+        font-size: 2rem;
+    }
 }
 
 .earnings-card--main .earnings-card__value {
-    font-size: 2.5rem;
+    font-size: 2rem;
+}
+
+@media (min-width: 768px) {
+    .earnings-card--main .earnings-card__value {
+        font-size: 2.5rem;
+    }
 }
 
 .earnings-card__value--small {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: var(--text-primary);
 }
 
-.earnings-cards-row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-md);
+@media (min-width: 768px) {
+    .earnings-card__value--small {
+        font-size: 1.5rem;
+    }
 }
 
 .motoboy-history__section {
@@ -90,12 +162,22 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 1.25rem;
-    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-lg);
+    font-weight: 800;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+}
+
+@media (min-width: 768px) {
+    .motoboy-history__section-title {
+        font-size: 1.25rem;
+        margin-bottom: var(--spacing-lg);
+    }
 }
 
 .motoboy-history__section-title svg {
     color: var(--primary-red);
+    flex-shrink: 0;
 }
 
 .motoboy-history__empty {
@@ -103,23 +185,46 @@
     flex-direction: column;
     align-items: center;
     gap: var(--spacing-md);
-    padding: var(--spacing-2xl);
+    padding: var(--spacing-xl);
     background: var(--bg-card);
     border: 1px dashed var(--border-color);
     border-radius: var(--radius-lg);
     color: var(--text-muted);
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .motoboy-history__empty {
+        padding: var(--spacing-2xl);
+    }
 }
 
 .motoboy-history__table-wrapper {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
     overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+}
+
+@media (min-width: 768px) {
+    .motoboy-history__table-wrapper {
+        border-radius: var(--radius-lg);
+    }
 }
 
 .motoboy-history__table {
     width: 100%;
+    min-width: 600px;
+    /* Ensure table structure on mobile */
     border-collapse: collapse;
+}
+
+@media (min-width: 768px) {
+    .motoboy-history__table {
+        min-width: auto;
+    }
 }
 
 .motoboy-history__table th {
@@ -132,6 +237,7 @@
     letter-spacing: 0.5px;
     color: var(--text-muted);
     border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
 }
 
 .motoboy-history__table td {
@@ -144,8 +250,10 @@
     border-bottom: none;
 }
 
-.motoboy-history__table tr:hover td {
-    background: rgba(255, 255, 255, 0.02);
+@media (hover: hover) {
+    .motoboy-history__table tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+    }
 }
 
 .motoboy-history__date {
@@ -155,18 +263,4 @@
 
 .motoboy-history__date span:first-child {
     font-weight: 600;
-}
-
-@media (max-width: 768px) {
-    .motoboy-history__table-wrapper {
-        overflow-x: auto;
-    }
-
-    .motoboy-history__table {
-        min-width: 600px;
-    }
-
-    .earnings-cards-row {
-        grid-template-columns: 1fr;
-    }
 }

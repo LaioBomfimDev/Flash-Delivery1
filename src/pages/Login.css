@@ -1,12 +1,23 @@
+/* Login - Mobile First */
 .login {
     min-height: 100vh;
+    min-height: 100dvh;
+    /* Dynamic viewport height for mobile browsers */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md);
+    padding-top: calc(var(--spacing-md) + var(--safe-area-top));
+    padding-bottom: calc(var(--spacing-md) + var(--safe-area-bottom));
     position: relative;
     overflow: hidden;
     background: var(--bg-primary);
+}
+
+@media (min-width: 768px) {
+    .login {
+        padding: var(--spacing-lg);
+    }
 }
 
 /* Electric Background */
@@ -26,28 +37,47 @@
         linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
 }
 
-/* Lightning bolt decoration */
+/* Lightning bolt decoration - hidden on small mobile */
 .login__lightning {
-    position: absolute;
-    top: 10%;
-    right: 10%;
-    width: 200px;
-    height: 300px;
-    opacity: 0.15;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f59e0b'%3E%3Cpath d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/%3E%3C/svg%3E") center/contain no-repeat;
-    animation: lightningStrike 4s ease-in-out infinite;
+    display: none;
 }
 
-.login__lightning::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: -100%;
-    width: 150px;
-    height: 200px;
-    opacity: 0.1;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23dc2626'%3E%3Cpath d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/%3E%3C/svg%3E") center/contain no-repeat;
-    animation: lightningStrike 4s ease-in-out infinite 2s;
+@media (min-width: 640px) {
+    .login__lightning {
+        display: block;
+        position: absolute;
+        top: 10%;
+        right: 10%;
+        width: 120px;
+        height: 180px;
+        opacity: 0.15;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f59e0b'%3E%3Cpath d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/%3E%3C/svg%3E") center/contain no-repeat;
+        animation: lightningStrike 4s ease-in-out infinite;
+    }
+
+    .login__lightning::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: -100%;
+        width: 100px;
+        height: 140px;
+        opacity: 0.1;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23dc2626'%3E%3Cpath d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/%3E%3C/svg%3E") center/contain no-repeat;
+        animation: lightningStrike 4s ease-in-out infinite 2s;
+    }
+}
+
+@media (min-width: 768px) {
+    .login__lightning {
+        width: 200px;
+        height: 300px;
+    }
+
+    .login__lightning::before {
+        width: 150px;
+        height: 200px;
+    }
 }
 
 .login__container {
@@ -59,82 +89,155 @@
 
 .login__header {
     text-align: center;
-    margin-bottom: var(--spacing-2xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+@media (min-width: 768px) {
+    .login__header {
+        margin-bottom: var(--spacing-2xl);
+    }
 }
 
 .login__logo {
-    width: 90px;
-    height: 90px;
+    width: 70px;
+    height: 70px;
     background: linear-gradient(135deg, var(--primary-red) 0%, var(--accent-orange) 100%);
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-lg);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto var(--spacing-lg);
+    margin: 0 auto var(--spacing-md);
     box-shadow: var(--shadow-glow);
     animation: electricPulse 3s ease-in-out infinite;
 }
 
+@media (min-width: 768px) {
+    .login__logo {
+        width: 90px;
+        height: 90px;
+        border-radius: var(--radius-xl);
+        margin-bottom: var(--spacing-lg);
+    }
+}
+
 .login__logo-icon {
-    width: 52px;
-    height: 52px;
+    width: 40px;
+    height: 40px;
     color: white;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
     animation: lightning 2s ease-in-out infinite;
 }
 
+@media (min-width: 768px) {
+    .login__logo-icon {
+        width: 52px;
+        height: 52px;
+    }
+}
+
 .login__title {
-    font-size: 2.75rem;
+    font-size: var(--font-size-3xl);
     font-weight: 900;
     color: var(--text-primary);
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
     letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+    .login__title {
+        font-size: 2.75rem;
+        margin-bottom: var(--spacing-sm);
+    }
 }
 
 .login__subtitle {
     color: var(--text-secondary);
-    font-size: 1.1rem;
+    font-size: var(--font-size-base);
     font-weight: 500;
+}
+
+@media (min-width: 768px) {
+    .login__subtitle {
+        font-size: 1.1rem;
+    }
 }
 
 .login__form {
     background: white;
     border: 1px solid var(--border-color);
-    border-radius: var(--radius-xl);
-    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
     box-shadow: var(--shadow-lg);
 }
 
+@media (min-width: 768px) {
+    .login__form {
+        border-radius: var(--radius-xl);
+        padding: var(--spacing-xl);
+    }
+}
+
 .login__form-title {
-    font-size: 1.125rem;
+    font-size: var(--font-size-base);
     font-weight: 600;
     text-align: center;
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
     color: var(--text-primary);
+}
+
+@media (min-width: 768px) {
+    .login__form-title {
+        font-size: 1.125rem;
+        margin-bottom: var(--spacing-lg);
+    }
 }
 
 .login__roles {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-xl);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+    .login__roles {
+        gap: var(--spacing-md);
+        margin-bottom: var(--spacing-xl);
+    }
 }
 
 .login__role {
     display: flex;
     align-items: center;
-    gap: var(--spacing-md);
-    padding: var(--spacing-md);
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    min-height: var(--touch-target-min);
     background: var(--bg-secondary);
     border: 2px solid transparent;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     text-align: left;
     transition: all var(--transition-normal);
+    cursor: pointer;
+    touch-action: manipulation;
 }
 
-.login__role:hover {
-    background: var(--bg-tertiary);
-    transform: translateX(4px);
+@media (min-width: 768px) {
+    .login__role {
+        gap: var(--spacing-md);
+        padding: var(--spacing-md);
+        border-radius: var(--radius-lg);
+    }
+}
+
+@media (hover: hover) {
+    .login__role:hover {
+        background: var(--bg-tertiary);
+        transform: translateX(4px);
+    }
+}
+
+.login__role:active {
+    transform: scale(0.99);
 }
 
 .login__role--selected {
@@ -154,14 +257,22 @@
 }
 
 .login__role-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: var(--radius-md);
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     transition: all var(--transition-normal);
+}
+
+@media (min-width: 768px) {
+    .login__role-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: var(--radius-md);
+    }
 }
 
 .login__role--gold .login__role-icon {
@@ -186,16 +297,23 @@
 .login__role-info {
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 
 .login__role-label {
     font-weight: 700;
-    font-size: 1rem;
+    font-size: var(--font-size-sm);
     color: var(--text-primary);
 }
 
+@media (min-width: 768px) {
+    .login__role-label {
+        font-size: 1rem;
+    }
+}
+
 .login__role-desc {
-    font-size: 0.85rem;
+    font-size: var(--font-size-xs);
     color: var(--text-muted);
     margin-top: 2px;
 }
@@ -206,21 +324,34 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 1rem 1.5rem;
+    padding: 0.875rem 1.25rem;
+    min-height: var(--touch-target-min);
     background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
     color: white;
-    font-size: 1rem;
+    font-size: var(--font-size-base);
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    border-radius: var(--radius-lg);
+    letter-spacing: 0.5px;
+    border-radius: var(--radius-md);
     transition: all var(--transition-normal);
     box-shadow: var(--shadow-sm);
+    touch-action: manipulation;
 }
 
-.login__submit:hover:not(:disabled) {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-glow);
+@media (min-width: 768px) {
+    .login__submit {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        letter-spacing: 1px;
+        border-radius: var(--radius-lg);
+    }
+}
+
+@media (hover: hover) {
+    .login__submit:hover:not(:disabled) {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-glow);
+    }
 }
 
 .login__submit:active:not(:disabled) {
@@ -242,35 +373,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    margin-top: var(--spacing-lg);
-    padding-top: var(--spacing-lg);
+    gap: 0.375rem;
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
     border-top: 1px solid var(--border-color);
-    font-size: 0.85rem;
+    font-size: var(--font-size-xs);
     color: var(--text-muted);
     font-weight: 500;
+}
+
+@media (min-width: 768px) {
+    .login__demo-note {
+        gap: 0.5rem;
+        margin-top: var(--spacing-lg);
+        padding-top: var(--spacing-lg);
+        font-size: 0.85rem;
+    }
 }
 
 .login__demo-note svg {
     color: var(--accent-gold);
     animation: lightning 2s ease-in-out infinite;
-}
-
-@media (max-width: 480px) {
-    .login {
-        padding: var(--spacing-md);
-    }
-
-    .login__title {
-        font-size: 2rem;
-    }
-
-    .login__form {
-        padding: var(--spacing-lg);
-    }
-
-    .login__role-icon {
-        width: 48px;
-        height: 48px;
-    }
+    flex-shrink: 0;
 }

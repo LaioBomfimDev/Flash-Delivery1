@@ -1,20 +1,36 @@
+/* TrackingPage - Mobile First */
 .tracking-page {
     min-height: 100vh;
+    min-height: 100dvh;
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md);
+    padding-top: calc(var(--spacing-xl) + var(--safe-area-top));
+    padding-bottom: calc(var(--spacing-md) + var(--safe-area-bottom));
+}
+
+@media (min-width: 768px) {
+    .tracking-page {
+        padding: var(--spacing-lg);
+    }
 }
 
 .tracking-page__container {
     width: 100%;
     max-width: 420px;
     background: white;
-    border-radius: var(--radius-2xl);
+    border-radius: var(--radius-xl);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
     overflow: hidden;
     animation: trackingFadeIn 0.5s ease forwards;
+}
+
+@media (min-width: 768px) {
+    .tracking-page__container {
+        border-radius: var(--radius-2xl);
+    }
 }
 
 @keyframes trackingFadeIn {
@@ -31,45 +47,72 @@
 
 /* Header */
 .tracking-page__header {
-    padding: var(--spacing-xl);
+    padding: var(--spacing-lg);
     text-align: center;
     border-bottom: 1px solid var(--border-color);
 }
 
+@media (min-width: 768px) {
+    .tracking-page__header {
+        padding: var(--spacing-xl);
+    }
+}
+
 .tracking-page__merchant-logo {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto var(--spacing-md);
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--spacing-sm);
     background: linear-gradient(135deg, var(--accent-gold) 0%, var(--primary-red) 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 900;
     color: white;
     box-shadow: 0 8px 24px rgba(234, 179, 8, 0.3);
 }
 
+@media (min-width: 768px) {
+    .tracking-page__merchant-logo {
+        width: 80px;
+        height: 80px;
+        margin-bottom: var(--spacing-md);
+        font-size: 2.5rem;
+    }
+}
+
 .tracking-page__merchant-name {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 800;
     color: var(--text-primary);
     margin: 0;
 }
 
+@media (min-width: 768px) {
+    .tracking-page__merchant-name {
+        font-size: 1.5rem;
+    }
+}
+
 /* Status Card */
 .tracking-page__status-card {
-    padding: var(--spacing-2xl);
+    padding: var(--spacing-xl) var(--spacing-lg);
     text-align: center;
     background: linear-gradient(135deg, white 0%, #fafafa 100%);
     position: relative;
 }
 
+@media (min-width: 768px) {
+    .tracking-page__status-card {
+        padding: var(--spacing-2xl);
+    }
+}
+
 .tracking-page__status-icon {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto var(--spacing-lg);
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--spacing-md);
     background: color-mix(in srgb, var(--status-color) 15%, white);
     border-radius: 50%;
     display: flex;
@@ -78,23 +121,44 @@
     color: var(--status-color);
 }
 
+@media (min-width: 768px) {
+    .tracking-page__status-icon {
+        width: 80px;
+        height: 80px;
+        margin-bottom: var(--spacing-lg);
+    }
+}
+
 .tracking-page__status-label {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 800;
     color: var(--status-color);
-    margin: 0 0 var(--spacing-sm);
+    margin: 0 0 var(--spacing-xs);
+}
+
+@media (min-width: 768px) {
+    .tracking-page__status-label {
+        font-size: 1.5rem;
+        margin-bottom: var(--spacing-sm);
+    }
 }
 
 .tracking-page__status-desc {
-    font-size: 1rem;
+    font-size: var(--font-size-base);
     color: var(--text-secondary);
     margin: 0;
 }
 
 /* Details */
 .tracking-page__details {
-    padding: var(--spacing-lg) var(--spacing-xl);
+    padding: var(--spacing-md) var(--spacing-lg);
     border-top: 1px solid var(--border-color);
+}
+
+@media (min-width: 768px) {
+    .tracking-page__details {
+        padding: var(--spacing-lg) var(--spacing-xl);
+    }
 }
 
 .tracking-page__detail {
@@ -119,6 +183,7 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
+    min-width: 0;
 }
 
 .tracking-page__detail-label {
@@ -133,14 +198,21 @@
     font-size: 0.95rem;
     font-weight: 600;
     color: var(--text-primary);
+    word-break: break-word;
 }
 
 /* Code Box */
 .tracking-page__code-box {
-    padding: var(--spacing-lg) var(--spacing-xl);
+    padding: var(--spacing-lg);
     background: var(--bg-secondary);
     text-align: center;
     border-top: 1px solid var(--border-color);
+}
+
+@media (min-width: 768px) {
+    .tracking-page__code-box {
+        padding: var(--spacing-lg) var(--spacing-xl);
+    }
 }
 
 .tracking-page__code-label {
@@ -155,15 +227,22 @@
 
 .tracking-page__code {
     display: inline-block;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 900;
     font-family: monospace;
     color: var(--text-primary);
     background: white;
-    padding: var(--spacing-sm) var(--spacing-lg);
+    padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--radius-md);
     border: 2px dashed var(--border-color);
     letter-spacing: 2px;
+}
+
+@media (min-width: 768px) {
+    .tracking-page__code {
+        font-size: 1.5rem;
+        padding: var(--spacing-sm) var(--spacing-lg);
+    }
 }
 
 /* Footer */
@@ -175,7 +254,14 @@
     justify-content: center;
     gap: var(--spacing-sm);
     color: var(--text-muted);
-    font-size: 0.85rem;
+    font-size: 0.75rem;
+    padding-bottom: calc(var(--spacing-lg) + var(--safe-area-bottom));
+}
+
+@media (min-width: 768px) {
+    .tracking-page__footer {
+        font-size: 0.85rem;
+    }
 }
 
 .tracking-page__flash-logo {
@@ -192,7 +278,7 @@
 
 /* Not Found State */
 .tracking-page__not-found {
-    padding: var(--spacing-3xl);
+    padding: var(--spacing-3xl) var(--spacing-xl);
     text-align: center;
 }
 
@@ -202,24 +288,19 @@
 }
 
 .tracking-page__not-found h1 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     margin: 0 0 var(--spacing-sm);
     color: var(--text-primary);
+}
+
+@media (min-width: 768px) {
+    .tracking-page__not-found h1 {
+        font-size: 1.5rem;
+    }
 }
 
 .tracking-page__not-found p {
     color: var(--text-secondary);
     margin: 0 0 var(--spacing-lg);
-}
-
-@media (max-width: 480px) {
-    .tracking-page {
-        padding: var(--spacing-md);
-        align-items: flex-start;
-        padding-top: var(--spacing-xl);
-    }
-
-    .tracking-page__container {
-        border-radius: var(--radius-xl);
-    }
+    font-size: var(--font-size-sm);
 }
