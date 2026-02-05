@@ -3,6 +3,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { DeliveryProvider } from './context/DeliveryContext';
 import { NotificationProvider } from './context/NotificationContext';
 import Toast from './components/Toast';
+import InstallPrompt from './components/InstallPrompt';
 
 // Pages
 import Login from './pages/Login';
@@ -145,6 +146,7 @@ export default function App() {
         <DeliveryProvider>
           <NotificationProvider>
             <AppRoutes />
+            <InstallPrompt />
             <Toast />
           </NotificationProvider>
         </DeliveryProvider>
