@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap');
 
+/* CSS Reset & Global Hardware Acceleration */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
 :root {
   /* ========================================
      CORE THEME - Based on Original Light Theme
@@ -112,15 +120,22 @@
 
 /* Global Page Transitions */
 body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  /* Ensure content is not hidden behind fixed header */
-  padding-top: calc(var(--header-height) + var(--safe-area-top));
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 .page {
+  /* Internal padding for page content */
   padding: var(--spacing-md);
-  min-height: calc(100vh - var(--header-height));
+  /* Top padding to account for fixed header + safe area + visual spacing */
+  padding-top: calc(var(--header-height) + var(--safe-area-top) + var(--spacing-md));
+  min-height: 100vh;
   width: 100%;
   max-width: var(--container-xl);
   margin: 0 auto;
@@ -129,6 +144,7 @@ body {
 @media (min-width: 768px) {
   .page {
     padding: var(--spacing-lg);
+    padding-top: calc(var(--header-height) + var(--safe-area-top) + var(--spacing-lg));
   }
 }
 
