@@ -9,8 +9,8 @@ export default function MotoboyHistory() {
     const { user } = useAuth();
     const { getMotoboyDeliveries, motoboys } = useDelivery();
 
-    const motoboyData = motoboys.find(m => m.id === user?.id);
-    const myDeliveries = getMotoboyDeliveries(user?.id);
+    const motoboyData = motoboys.find(m => m.id === user?.id) || { totalEarnings: 0, totalDeliveries: 0 };
+    const myDeliveries = getMotoboyDeliveries(user?.id) || [];
     const completedDeliveries = myDeliveries.filter(d => d.status === 'completed');
 
     const todayEarnings = completedDeliveries

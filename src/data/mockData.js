@@ -81,6 +81,22 @@ export const mockDeliveries = [
     acceptedAt: new Date(Date.now() - 55 * 60000).toISOString(),
     completedAt: new Date(Date.now() - 30 * 60000).toISOString(),
   },
+  {
+    id: 'd4',
+    merchantId: 'm2',
+    merchantName: 'Hamburgueria Turbo',
+    pickupAddress: 'Av. Principal, 200',
+    pickupCoords: { lat: -12.3545, lng: -38.3765 },
+    deliveryAddress: 'Rua Barão do Rio Branco, 100 - Centro',
+    deliveryCoords: { lat: -12.3567, lng: -38.3789 },
+    status: 'completed',
+    motoboyId: 'b1',
+    motoboyName: 'Carlos Silva',
+    value: 8.50,
+    createdAt: new Date(Date.now() - 120 * 60000).toISOString(),
+    acceptedAt: new Date(Date.now() - 110 * 60000).toISOString(),
+    completedAt: new Date(Date.now() - 90 * 60000).toISOString(),
+  },
 ];
 
 // Demo user credentials
