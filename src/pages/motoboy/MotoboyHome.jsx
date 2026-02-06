@@ -43,8 +43,11 @@ export default function MotoboyHome() {
         notify.deliveryCompleted();
     };
 
-    const openInMaps = (coords) => {
-        window.open(`https://www.google.com/maps/dir/?api=1&destination=${coords.lat},${coords.lng}`, '_blank');
+    const openInMaps = (address) => {
+        // Use full address for better accuracy than mock coordinates
+        // Google Maps defaults origin to "My Location" (GPS) automatically
+        const query = encodeURIComponent(address);
+        window.open(`https://www.google.com/maps/dir/?api=1&destination=${query}&travelmode=driving`, '_blank');
     };
 
     return (
@@ -90,7 +93,7 @@ export default function MotoboyHome() {
                                             <div className="delivery-card__maps-actions">
                                                 <button
                                                     className="btn btn--secondary"
-                                                    onClick={() => openInMaps(delivery.pickupCoords)}
+                                                    onClick={() => openInMaps(delivery.pickupAddress)}
                                                     title="Ir para o Comércio"
                                                 >
                                                     <Navigation size={18} />
@@ -98,7 +101,7 @@ export default function MotoboyHome() {
                                                 </button>
                                                 <button
                                                     className="btn btn--gold"
-                                                    onClick={() => openInMaps(delivery.deliveryCoords)}
+                                                    onClick={() => openInMaps(delivery.deliveryAddress)}
                                                     title="Ir para o Cliente"
                                                 >
                                                     <Navigation size={18} />
