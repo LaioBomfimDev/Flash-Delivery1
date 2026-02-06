@@ -87,13 +87,24 @@ export default function MotoboyHome() {
                                     showMotoboy={false}
                                     actions={
                                         <>
-                                            <button
-                                                className="btn btn--gold"
-                                                onClick={() => openInMaps(delivery.deliveryCoords)}
-                                            >
-                                                <Navigation size={18} />
-                                                Abrir Maps
-                                            </button>
+                                            <div className="delivery-card__maps-actions">
+                                                <button
+                                                    className="btn btn--secondary"
+                                                    onClick={() => openInMaps(delivery.pickupCoords)}
+                                                    title="Ir para o Comércio"
+                                                >
+                                                    <Navigation size={18} />
+                                                    Coleta
+                                                </button>
+                                                <button
+                                                    className="btn btn--gold"
+                                                    onClick={() => openInMaps(delivery.deliveryCoords)}
+                                                    title="Ir para o Cliente"
+                                                >
+                                                    <Navigation size={18} />
+                                                    Entrega
+                                                </button>
+                                            </div>
                                             <button
                                                 className="btn btn--success"
                                                 onClick={() => handleComplete(delivery.id)}
