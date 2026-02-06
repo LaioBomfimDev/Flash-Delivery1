@@ -366,9 +366,3 @@
     align-items: center;
     gap: var(--spacing-sm);
 }
-
-@media (min-width: 768px) {
-    .header__actions-wrapper {
-        gap: var(--spacing-md);
-    }
-}
