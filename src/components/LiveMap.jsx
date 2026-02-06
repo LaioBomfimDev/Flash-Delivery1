@@ -33,12 +33,13 @@ export default function LiveMap({ deliveries = [], height = '400px', showAllMark
                     Mapa ao Vivo
                 </h3>
                 <span className="live-map__count">
-                    {activeDeliveries.length} entrega{activeDeliveries.length !== 1 ? 's' : ''} ativa{activeDeliveries.length !== 1 ? 's' : ''}
+                    {`${activeDeliveries.length} entrega${activeDeliveries.length !== 1 ? 's' : ''} ativa${activeDeliveries.length !== 1 ? 's' : ''}`}
                 </span>
             </div>
 
             <div className="live-map__container">
                 <iframe
+                    key={mapUrl}
                     className="live-map__iframe"
                     src={mapUrl}
                     allowFullScreen
