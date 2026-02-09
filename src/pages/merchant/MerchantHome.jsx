@@ -59,18 +59,64 @@ export default function MerchantHome() {
                 <div className="merchant-home__hero">
                     {canRequest ? (
                         <>
-                            <h1 className="merchant-home__title">
-                                Olá, <span className="text-gold">{user?.name}</span>
-                            </h1>
-                            <p className="merchant-home__subtitle">
-                                Solicite uma entrega rápida clicando no botão abaixo
-                            </p>
+                            {!showModal ? (
+                                <>
+                                    <h1 className="merchant-home__title">
+                                        Olá, <span className="text-gold">{user?.name}</span>
+                                    </h1>
+                                    <p className="merchant-home__subtitle">
+                                        Solicite uma entrega rápida clicando no botão abaixo
+                                    </p>
 
-                            <div className="merchant-home__cta">
-                                <LightningButton onClick={() => setShowModal(true)} size="large">
-                                    Chamar Flash
-                                </LightningButton>
-                            </div>
+                                    <div className="merchant-home__cta">
+                                        <LightningButton onClick={() => setShowModal(true)} size="large">
+                                            Chamar Flash
+                                        </LightningButton>
+                                    </div>
+                                </>
+                            ) : (
+                                <div className="merchant-home__request-form">
+                                    <div className="request-form__header">
+                                        <Zap size={24} />
+                                        <h3>Nova Entrega</h3>
+                                    </div>
+
+                                    <div className="request-form__body">
+                                        <div className="modal__wait-notice">
+                                            <Clock size={20} />
+                                            <span>Em até <strong>10 minutos</strong> um entregador chegará</span>
+                                        </div>
+
+                                        <div className="form-group">
+                                            <label>Endereço de Entrega</label>
+                                            <textarea
+                                                value={address}
+                                                onChange={(e) => setAddress(e.target.value)}
+                                                placeholder="Cole o endereço ou link do Google Maps aqui..."
+                                                rows={3}
+                                                autoFocus
+                                            />
+                                            <span className="form-hint">
+                                                Aceita texto simples ou links do Google Maps/WhatsApp
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div className="request-form__footer">
+                                        <button className="btn btn--secondary" onClick={() => setShowModal(false)}>
+                                            Cancelar
+                                        </button>
+                                        <button
+                                            className="btn btn--primary"
+                                            onClick={handleRequestDelivery}
+                                            disabled={!address.trim() || loading}
+                                        >
+                                            <Send size={18} />
+                                            {loading ? 'Enviando...' : 'Solicitar Entrega'}
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
                         </>
                     ) : (
                         <div className="merchant-home__blocked">
@@ -138,57 +184,6 @@ export default function MerchantHome() {
                     </div>
                 </section>
             </main>
-
-            {/* Request Modal */}
-            {showModal && (
-                <div className="modal-overlay" onClick={() => setShowModal(false)}>
-                    <div className="modal" onClick={e => e.stopPropagation()}>
-                        <div className="modal__header">
-                            <h3>
-                                <Zap size={24} />
-                                Nova Entrega
-                            </h3>
-                            <button className="modal__close" onClick={() => setShowModal(false)}>
-                                <X size={24} />
-                            </button>
-                        </div>
-
-                        <div className="modal__body">
-                            <div className="modal__wait-notice">
-                                <Clock size={20} />
-                                <span>Em até <strong>10 minutos</strong> um entregador chegará ao seu estabelecimento</span>
-                            </div>
-
-                            <div className="form-group">
-                                <label>Endereço de Entrega</label>
-                                <textarea
-                                    value={address}
-                                    onChange={(e) => setAddress(e.target.value)}
-                                    placeholder="Cole o endereço ou link do Google Maps aqui..."
-                                    rows={4}
-                                />
-                                <span className="form-hint">
-                                    Aceita texto simples ou links do Google Maps/WhatsApp
-                                </span>
-                            </div>
-                        </div>
-
-                        <div className="modal__footer">
-                            <button className="btn btn--secondary" onClick={() => setShowModal(false)}>
-                                Cancelar
-                            </button>
-                            <button
-                                className="btn btn--primary"
-                                onClick={handleRequestDelivery}
-                                disabled={!address.trim() || loading}
-                            >
-                                <Send size={18} />
-                                {loading ? 'Enviando...' : 'Solicitar Entrega'}
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
 
             <WhatsAppButton message="Olá! Sou comerciante parceiro do Flash Catu e preciso de ajuda." />
         </>

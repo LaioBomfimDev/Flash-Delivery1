@@ -11,7 +11,9 @@ export default function MotoboyHistory() {
 
     const motoboyData = motoboys.find(m => m.id === user?.id) || { totalEarnings: 0, totalDeliveries: 0 };
     const myDeliveries = getMotoboyDeliveries(user?.id) || [];
-    const completedDeliveries = myDeliveries.filter(d => d.status === 'completed');
+    const completedDeliveries = myDeliveries
+        .filter(d => d.status === 'completed')
+        .sort((a, b) => new Date(b.completedAt) - new Date(a.completedAt));
 
     const todayEarnings = completedDeliveries
         .filter(d => new Date(d.completedAt).toDateString() === new Date().toDateString())

@@ -1,0 +1,117 @@
+/* MerchantHistory - Mobile First */
+.merchant-history {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.merchant-history__section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.merchant-history__section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--font-size-lg);
+    font-weight: 800;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+}
+
+@media (min-width: 768px) {
+    .merchant-history__section-title {
+        font-size: 1.25rem;
+        margin-bottom: var(--spacing-lg);
+    }
+}
+
+.merchant-history__section-title svg {
+    color: var(--accent-gold);
+    flex-shrink: 0;
+}
+
+.merchant-history__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-xl);
+    background: var(--bg-card);
+    border: 1px dashed var(--border-color);
+    border-radius: var(--radius-lg);
+    color: var(--text-muted);
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .merchant-history__empty {
+        padding: var(--spacing-2xl);
+    }
+}
+
+.merchant-history__table-wrapper {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+}
+
+@media (min-width: 768px) {
+    .merchant-history__table-wrapper {
+        border-radius: var(--radius-lg);
+    }
+}
+
+.merchant-history__table {
+    width: 100%;
+    min-width: 800px;
+    /* Wider min-width to accommodate extra columns */
+    border-collapse: collapse;
+}
+
+@media (min-width: 768px) {
+    .merchant-history__table {
+        min-width: auto;
+    }
+}
+
+.merchant-history__table th {
+    text-align: left;
+    padding: var(--spacing-md);
+    background: var(--bg-tertiary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+}
+
+.merchant-history__table td {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.9rem;
+}
+
+.merchant-history__table tr:last-child td {
+    border-bottom: none;
+}
+
+@media (hover: hover) {
+    .merchant-history__table tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+    }
+}
+
+.merchant-history__date {
+    display: flex;
+    flex-direction: column;
+}
+
+.merchant-history__date span:first-child {
+    font-weight: 600;
+}

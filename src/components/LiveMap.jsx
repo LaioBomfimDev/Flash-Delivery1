@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { MapPin, Navigation } from 'lucide-react';
 import './LiveMap.css';
 
@@ -22,8 +23,29 @@ export default function LiveMap({ deliveries = [], height = '400px', showAllMark
 
     const center = getCenter();
 
+    const [userLocation, setUserLocation] = useState(null);
+
+    // Get user's current location
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    setUserLocation({
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    });
+                },
+                (error) => {
+                    console.error("Error getting location:", error);
+                }
+            );
+        }
+    }, []);
+
     // Create Google Maps embed URL
-    const mapUrl = `https://www.google.com/maps/embed/v1/view?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&center=${center.lat},${center.lng}&zoom=14&maptype=roadmap`;
+    // If we have user location, center there. Otherwise, center on deliveries.
+    const mapCenter = userLocation || center;
+    const mapUrl = `https://www.google.com/maps/embed/v1/view?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&center=${mapCenter.lat},${mapCenter.lng}&zoom=15&maptype=roadmap`;
 
     return (
         <div className="live-map" style={{ height }}>

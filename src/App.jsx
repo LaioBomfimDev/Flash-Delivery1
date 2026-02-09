@@ -8,6 +8,7 @@ import InstallPrompt from './components/InstallPrompt';
 // Pages
 import Login from './pages/Login';
 import MerchantHome from './pages/merchant/MerchantHome';
+import MerchantHistory from './pages/merchant/MerchantHistory';
 import MotoboyHome from './pages/motoboy/MotoboyHome';
 import MotoboyHistory from './pages/motoboy/MotoboyHistory';
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -99,7 +100,7 @@ function AppRoutes() {
       } />
       <Route path="/merchant/history" element={
         <ProtectedRoute allowedRoles={['merchant']}>
-          <MerchantHome />
+          <MerchantHistory />
         </ProtectedRoute>
       } />
 

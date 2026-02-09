@@ -46,7 +46,14 @@ export default function MotoboyHome() {
     const openInMaps = (address) => {
         // Use full address for better accuracy than mock coordinates
         // Google Maps defaults origin to "My Location" (GPS) automatically
-        const query = encodeURIComponent(address);
+
+        let queryAddress = address;
+        // Append city/state context if missing to avoid ambiguity (e.g. matching landmarks)
+        if (!queryAddress.toLowerCase().includes('catu')) {
+            queryAddress += ', Catu - BA';
+        }
+
+        const query = encodeURIComponent(queryAddress);
         window.open(`https://www.google.com/maps/dir/?api=1&destination=${query}&travelmode=driving`, '_blank');
     };
 
