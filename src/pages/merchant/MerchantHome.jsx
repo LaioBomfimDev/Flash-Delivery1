@@ -12,6 +12,7 @@ import WhatsAppButton from '../../components/WhatsAppButton';
 import './MerchantHome.css';
 
 export default function MerchantHome() {
+    // Last updated: Force Vercel Deploy
     const { user } = useAuth();
     const { getMerchantDeliveries, createDelivery, merchants, deliveries } = useDelivery();
     const { notify } = useNotification();
