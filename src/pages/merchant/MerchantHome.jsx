@@ -59,28 +59,24 @@ export default function MerchantHome() {
                 <div className="merchant-home__hero">
                     {canRequest ? (
                         <>
-                            {!showModal ? (
-                                <>
-                                    <h1 className="merchant-home__title">
-                                        Olá, <span className="text-gold">{user?.name}</span>
-                                    </h1>
-                                    <p className="merchant-home__subtitle">
-                                        Solicite uma entrega rápida clicando no botão abaixo
-                                    </p>
+                            <h1 className="merchant-home__title">
+                                Olá, <span className="text-gold">{user?.name}</span>
+                            </h1>
+                            <p className="merchant-home__subtitle">
+                                Solicite uma entrega rápida clicando no botão abaixo
+                            </p>
 
-                                    <div className="merchant-home__cta">
-                                        <LightningButton onClick={() => setShowModal(true)} size="large">
-                                            Chamar Flash
-                                        </LightningButton>
-                                    </div>
-                                </>
-                            ) : (
+                            <div className="merchant-home__cta">
+                                <LightningButton
+                                    onClick={() => setShowModal(!showModal)}
+                                    size="large"
+                                >
+                                    {showModal ? 'Cancelar Solicitação' : 'Chamar Flash'}
+                                </LightningButton>
+                            </div>
+
+                            <div className={`merchant-home__form-container ${showModal ? 'open' : ''}`}>
                                 <div className="merchant-home__request-form">
-                                    <div className="request-form__header">
-                                        <Zap size={24} />
-                                        <h3>Nova Entrega</h3>
-                                    </div>
-
                                     <div className="request-form__body">
                                         <div className="modal__wait-notice">
                                             <Clock size={20} />
@@ -103,20 +99,18 @@ export default function MerchantHome() {
                                     </div>
 
                                     <div className="request-form__footer">
-                                        <button className="btn btn--secondary" onClick={() => setShowModal(false)}>
-                                            Cancelar
-                                        </button>
                                         <button
                                             className="btn btn--primary"
                                             onClick={handleRequestDelivery}
                                             disabled={!address.trim() || loading}
+                                            style={{ width: '100%' }}
                                         >
                                             <Send size={18} />
-                                            {loading ? 'Enviando...' : 'Solicitar Entrega'}
+                                            {loading ? 'Enviando...' : 'Confirmar Pedido'}
                                         </button>
                                     </div>
                                 </div>
-                            )}
+                            </div>
                         </>
                     ) : (
                         <div className="merchant-home__blocked">
